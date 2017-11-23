@@ -10,7 +10,6 @@
   lineinfile:
     backup: yes
     dest: "{{ pkginReposConf }}"
-    #insertafter: EOF
     regexp: "^http.*"
     line: "{{ reposLine }}"
     state: present

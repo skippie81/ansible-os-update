@@ -1,3 +1,10 @@
-SmartOSRepo: "{{ getLatestSmartOS.stdout }}"
+# smartos repo url
+SmartOSRepoURL: "https://pkgsrc.joyent.com/packages/SmartOS/"
+
+# get the smartos repo page and set latest repo
+grepline: "| egrep '20[0-9]{2}Q[0-9]{1}' | sed 's/^<a href=\\\\"//g' | sed 's/\/\\\\">.*//g' | sort | tail -1"
+repo_html: {{ lookup('url',SmartOSRepoURL,split_lines=False) }}
+SmartOSRepo: {{ lookup('pipe','echo ' + repo_html + grepline) }}
+
 pkginReposConf: "/opt/local/etc/pkgin/repositories.conf"
-reposLine: "https://pkgsrc.joyent.com/packages/SmartOS/{{ SmartOSRepo }}/x86_64/All"
+reposLine: "{{ SmartOSRepoURL }}{{ SmartOSRepo }}/x86_64/All"
