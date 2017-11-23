@@ -1,3 +1,5 @@
+- include: facts.yml
+
 - name: Update Systems
   hosts: all
   become: true

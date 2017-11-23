@@ -1,0 +1,21 @@
+- name: Get some needed facts
+  hosts: all
+  become: false
+  tasks:
+  - name: get latest SmartOS repo version
+    run_once: true
+    delegate_to: localhost
+    shell: curl -s http://pkgsrc.joyent.com/packages/SmartOS/ | egrep "20[0-9]{2}Q[0-9]{1}" | sed 's/^<a href=\"//g' | sed 's/\/\">.*//g' | sort | tail -1
+    register: getLatestSmartOS
+    changed_when: false
+
+  - name: check latest SmartOS repo
+    run_once: true
+    delegate_to: localhost
+    debug:
+      var: getLatestSmartOS.stdout
+
+  - name: register SmartOS release
+    set_fact:
+      SmartOS_release: getLatestSmartOS.stdout
+    when: ansible_distribution == "SmartOS"

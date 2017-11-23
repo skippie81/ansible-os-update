@@ -3,6 +3,7 @@
   async: 0
   poll: 0
   notify: wait for host
+  failed_when: false
 
 - name: wait for host
   delegate_to: localhost
