@@ -6,11 +6,13 @@ Using the native distribution packaging system. Checks for required reboots and 
 
 
 ## Current supported operating systems distributions
-- GNU/Linux Debian
-- GNU/Linux Centos
-- GNU/Linux RedHat
-- Unix FreeBSD
-- Unix Smartos
+
+|System|OS Family| Distributions |Tested Distributions| Tested Arch|
+|:----:|:-------:|---------------|--------------------|------------|
+|GNU/Linux|Debian| Debian,Ubuntu,... | Debian| amd64,armv6l |
+|GNU/Linux|RedHat| RedHet,Centos | Centos | amd64 |
+|Unix|FreeBSD| FreeBSD |FreeBSD 11.x | amd64 |
+|Unix|Solaris| SmartOS |SmartOS| amd64 |
 
 more distributions can follow
 
