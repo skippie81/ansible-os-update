@@ -1,5 +1,5 @@
 - name: reboot
-  shell: reboot
+  shell: shutdown -r now
   async: 0
   poll: 0
   notify: wait
