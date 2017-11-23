@@ -1,4 +1,4 @@
-- name: Get some needed facts
+- name: Get some needed facts and prepare for playbook
   hosts: all
   become: false
   tasks:
@@ -19,3 +19,11 @@
     set_fact:
       SmartOS_release: getLatestSmartOS.stdout
     when: ansible_distribution == "SmartOS"
+
+  - name: create log directory
+    delegate_to: localhost
+    run_once: true
+    file:
+      path: "{{ playbook_dir }}/log"
+      state: directory
+      mode: 0750
