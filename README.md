@@ -12,9 +12,16 @@ Using the native distribution packaging system. Checks for required reboots and 
 - Unix FreeBSD
 - Unix Smartos
 
+more distributions can follow
+
 ## Usage
 
-### Do Update
+- clone this repo
+- install ansible
+- create ansible inventory
+- run ansble-playbook
+
+### Run playbook
 ```
 ansible-playbook main.yml
 ```
@@ -29,3 +36,14 @@ see group_vars/all
 |update_logs|boolean|write update output to logfiles|
 |smartos_pkgin_global_zone|boolean|run pkgin update in Solaris derived systems global zone|
 
+## Requirements
+
+
+### FreeBSD special instructions
+
+for ansible to work on FreeBSD machines be sure to add following host vars in your inventory file or dynamci invenotry
+```
+ansible_python_interpreter=/usr/local/bin/python
+ansible_perl_interpreter=/usr/local/bin/perl5
+ansible_bash_interpreter=/usr/local/bin/bash
+```
