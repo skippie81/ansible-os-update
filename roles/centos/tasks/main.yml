@@ -16,7 +16,7 @@
 - name: check if running in a BrandZ zone
   command: uname -v
   register: not_in_zone
-  changed_when: "BrandZ virtual linux" not in not_in_zone.stdout
+  changed_when: "'BrandZ virtual linux' not in not_in_zone.stdout"
 
 - name: run needs-restarting -r
   command: needs-restarting -r
