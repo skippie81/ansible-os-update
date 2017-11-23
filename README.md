@@ -33,6 +33,7 @@ see group_vars/all
 
 |Var|Values|Usage|
 |---|:----:|-----|
+|reboot_host|boolean|reboot host autmatically when needed|
 |reboot_timeout|integer|timeout in seconds to wait for host to respond after reboot|
 |wait_for_host_after_reboot|boolean|enable wait for host to respond after reboot|
 |update_logs|boolean|write update output to logfiles|
