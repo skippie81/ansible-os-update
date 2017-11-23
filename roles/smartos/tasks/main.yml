@@ -1,12 +1,10 @@
 - name: get latest SmartOS repo version
-  run_once: true
   become: false
   shell: curl -s http://pkgsrc.joyent.com/packages/SmartOS/ | egrep "20[0-9]{2}Q[0-9]{1}" | sed 's/^<a href=\"//g' | sed 's/\/\">.*//g' | sort | tail -1
   register: getLatestSmartOS
   changed_when: false
 
 - name: check latest SmartOS repo
-  run_once: true
   become: false
   local_action: debug var=getLatestSmartOS.stdout
 
