@@ -12,8 +12,7 @@
 - name: wait
   delegate_to: localhost
   wait_for:
-    host: "{{ ansible_ssh_host }}"
-    port: "{{ ansible_ssh_port }}"
+    host: "{{ inventory_hostname }}"
     state: started
     delay: 10
     timeout: "{{ reboot_timeout }}"
