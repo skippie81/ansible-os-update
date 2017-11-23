@@ -2,10 +2,12 @@
   shell: sleep 1 && shutdown -r now "Reboot by ansible os update"
   async: 1
   poll: 0
-  notify: wait
+  changed_when: true
   ignore_errors: yes
   when:
   - reboot_host
+  notify:
+  - wait
 
 - name: wait
   delegate_to: localhost
