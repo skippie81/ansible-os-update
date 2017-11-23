@@ -1,6 +1,6 @@
 - name: reboot
   shell: sleep 1 && shutdown -r now "Reboot by ansible os update"
-  async: 0
+  async: 1
   poll: 0
   notify: wait
   ignore_errors: yes
@@ -13,6 +13,7 @@
     host: "{{ ansible_ssh_host }}"
     port: "{{ ansible_ssh_port }}"
     state: started
+    delay: 10
     timeout: "{{ reboot_timeout }}"
   when:
   - wait_for_host_after_reboot
