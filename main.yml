@@ -1,0 +1,11 @@
+- name: Update Systems
+  hosts: all
+  become: true
+  roles:
+    - { role: debian, when: ansible_os_family == "Debian" }
+    - { role: centos, when: ansible_os_family == "RetHad" }
+    - { role: freebsd, when: ansible_os_family == "FreeBSD" }
+    - { role: smartos, when: ansible_os_family == "Solaris" and ansible_distribution == "SmartOS" }
+  handlers:
+    - include: handlers/logging.yml
+    - include: handlers/reboot.yml

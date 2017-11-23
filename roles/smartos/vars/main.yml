@@ -1,0 +1,3 @@
+SmartOSRepo: "{{ getLatestSmartOS.stdout }}"
+pkginReposConf: "/opt/local/etc/pkgin/repositories.conf"
+reposLine: "https://pkgsrc.joyent.com/packages/SmartOS/{{ SmartOSRepo }}/x86_64/All"

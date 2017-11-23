@@ -1,0 +1,36 @@
+- name: install yum-utils needed to check if reboot is required
+  yum:
+    name: yum-utils
+    state: latest
+  when: ansible_os_family == "RedHat"
+
+- name: yum update
+  yum:
+    name: '*'
+    state: latest
+  register: output
+  when: ansible_os_family == "RedHat"
+  notify:
+  - yum log to file
+
+- name: check if running in a BrandZ zone
+  command: uname -v
+  register: not_in_zone
+  changed_when: "BrandZ virtual linux" not in not_in_zone.stdout
+
+- name: run needs-restarting -r
+  command: needs-restarting -r
+  register: needs_restarting
+  changed_when: needs_restarting.rc == 1
+  failed_when: needs_restarting.rc != 0 and needs_restarting.rc != 1
+  notify:
+  - reboot
+
+- name: run needs-reatrting -s
+  command: needs-restarting -s
+  register: needs_restarting_services
+  changed_when: needs_restarting_services.rc == 1
+  failed_when: needs_restarting_services.rc != 0 and needs_restarting_services.rc != 1
+  when: not_in_zone.changed
+  notify:
+  - reboot

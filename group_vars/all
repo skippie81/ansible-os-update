@@ -1,0 +1,5 @@
+# global options
+reboot_timeout: 300
+
+# SmartOS options
+smartos_pkgin_global_zone: true

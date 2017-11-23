@@ -1,0 +1,29 @@
+- name: FreeBSD pkg update repository
+  command: pkg update
+  register: pkgUpdate
+  when: ansible_os_family == "FreeBSD"
+  changed_when: "'FreeBSD repository update completed.' in pkgUpdate.stdout"
+
+- name: FreeBSD pkg upgrade packages
+  command: pkg upgrade --yes
+  register: output
+  when: ansible_os_family == "FreeBSD"
+  changed_when: "'Your packages are up to date' not in output.stdout"
+  notify:
+  - log to file
+
+- meta: flush_handlers
+
+- name: FreeBSD pkg clean cache
+  command: pkg clean --yes
+  when: output|changed
+
+- name: FreeBSD freebsd-update fetch and install
+  shell: freebsd-update --not-running-from-cron fetch | tee freebsd-update.log; freebsd-update --not-running-from-cron install | tee freebsd-updte.log
+  register: output
+  when: ansible_os_family == "FreeBSD"
+  changed_when: "'No updates are available to install' not in output.stdout"
+  notify:
+  - log to file
+
+- meta: flush_handlers
