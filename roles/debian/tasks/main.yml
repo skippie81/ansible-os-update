@@ -14,17 +14,18 @@
   notify:
   - log to file
 
-- name: run checkrestart
-  command: checkrestart
-  register: checkrestart_out
-  changed_when: "Found 0 processes using old versions of upgraded files' not in checkrestart_out.stdout"
-  notify:
-  - reboot
-
 - name: check if running in a BrandZ zone
   command: uname -v
   register: not_in_zone
   changed_when: "'BrandZ virtual linux' not in not_in_zone.stdout"
+
+- name: run checkrestart
+  command: checkrestart
+  register: checkrestart_out
+  changed_when: "Found 0 processes using old versions of upgraded files' not in checkrestart_out.stdout"
+  when: not_in_zone.changed
+  notify:
+  - reboot
 
 - name: check running kernel version
   shell: "uname -v | awk '{print $4}'"
