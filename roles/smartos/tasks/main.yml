@@ -10,6 +10,14 @@
   become: false
   local_action: debug var=getLatestSmartOS.stdout
 
+- name: get zone name
+  command: zonename
+  register: zonename
+
+- name: register zone name
+  set_fact:
+    zone: "{{ zonename.stdout }}"
+
 - name: SmartOS pkgin repositories.conf
   lineinfile:
     backup: yes
@@ -18,7 +26,9 @@
     regexp: "^http.*"
     line: "{{ reposLine }}"
     state: present
-  when: ansible_os_family == "Solaris"
+  when:
+  - ansible_os_family == "Solaris"
+  - ( smartos_pkgin_global_zone or zone != 'global' )
 
 - name: SmartOS pkgin update
   shell: /opt/local/bin/pkgin up
