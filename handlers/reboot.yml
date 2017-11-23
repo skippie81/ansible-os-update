@@ -4,6 +4,8 @@
   poll: 0
   notify: wait
   ignore_errors: yes
+  when:
+  - reboot_host
 
 - name: wait
   delegate_to: localhost

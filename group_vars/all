@@ -1,4 +1,5 @@
 # global options
+reboot_host: true
 reboot_timeout: 300
 wait_for_host_after_reboot: true
 update_logs: true
