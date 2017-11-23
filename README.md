@@ -49,3 +49,8 @@ ansible_python_interpreter=/usr/local/bin/python
 ansible_perl_interpreter=/usr/local/bin/perl5
 ansible_bash_interpreter=/usr/local/bin/bash
 ```
+
+## Note
+
+The play for Solaris family (currently only SmartOS is tested) are global zone aware.
+The play for all GNU/Linux systems are LX Zone aware, if running in an LX Brand zone on SmartOS the kernel versions are excluded in reboot chekcs.
