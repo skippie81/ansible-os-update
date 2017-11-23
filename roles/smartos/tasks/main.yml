@@ -33,7 +33,9 @@
 - name: SmartOS pkgin update
   shell: /opt/local/bin/pkgin up
   register: output
-  when: ansible_os_family == "Solaris"
+  when:
+  - ansible_os_family == "Solaris"
+  - ( smartos_pkgin_global_zone or zone != 'global' )
   changed_when: "'is up-to-date' not in output.stdout"
   notify:
   - log to file
@@ -43,7 +45,9 @@
 - name: SmartOS pkgin upgrade
   shell: /opt/local/bin/pkgin -y fug
   register: output
-  when: ansible_os_family == "Solaris"
+  when:
+  - ansible_os_family == "Solaris"
+  - ( smartos_pkgin_global_zone or zone != 'global' )
   changed_when: "'nothing to do' not in output.stdout"
   notify:
   - log to file
