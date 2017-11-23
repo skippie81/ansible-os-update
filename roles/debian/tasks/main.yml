@@ -38,7 +38,7 @@
   changed_when: running_kernel.stdout != installed_kernel.stdout
   when:
   - not_in_zone.changed
-  - 'arm' not in ansible_architecture
+  - ansible_architecture != "armv6l"
   notify:
   - reboot
 
