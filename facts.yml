@@ -27,3 +27,5 @@
       path: "{{ playbook_dir }}/log"
       state: directory
       mode: 0750
+    when:
+    - update_logs

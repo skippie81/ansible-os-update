@@ -5,6 +5,8 @@
     src: "{{ playbook_dir }}/templates/logfile.j2"
     dest: "{{ playbook_dir }}/log/{{ ansible_hostname }}.{{ ansible_date_time.year }}{{ ansible_date_time.month }}{{ ansible_date_time.day }}"
     mode: 0640
+  when:
+  - update_logs
 
 - name: yum log to file
   delegate_to: localhost
@@ -13,3 +15,5 @@
     src: "{{ playbook_dir }}/templates/logfile_yum.j2"
     dest: "{{ playbook_dir }}/log/{{ ansible_hostname }}.{{ ansible_date_time.year }}{{ ansible_date_time.month }}{{ ansible_date_time.day }}"
     mode: 0640
+  when:
+  - update_logs
