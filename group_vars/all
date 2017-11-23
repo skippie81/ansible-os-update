@@ -1,5 +1,6 @@
 # global options
 reboot_timeout: 300
+wait_for_host_after_reboot: true
 
 # SmartOS options
 smartos_pkgin_global_zone: true

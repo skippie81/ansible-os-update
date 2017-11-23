@@ -2,13 +2,15 @@
   shell: reboot
   async: 0
   poll: 0
-  notify: wait for host
-  failed_when: false
+  notify: wait
+  ignore_errors: yes
 
-- name: wait for host
+- name: wait
   delegate_to: localhost
   wait_for:
     host: "{{ ansible_ssh_host }}"
     port: "{{ ansible_ssh_port }}"
     state: started
     timeout: "{{ reboot_timeout }}"
+  when:
+  - wait_for_host_after_reboot
