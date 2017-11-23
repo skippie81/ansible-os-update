@@ -7,7 +7,7 @@
 - name: wait for host
   delegate_to: localhost
   wait_for:
-    host: {{ ansible_ssh_host }}
-    port: {{ ansible_ssh_port }}
+    host: "{{ ansible_ssh_host }}"
+    port: "{{ ansible_ssh_port }}"
     state: started
-    timeout: {{ reboot_timeout }}
+    timeout: "{{ reboot_timeout }}"
