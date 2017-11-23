@@ -22,7 +22,7 @@
 - name: run checkrestart
   command: checkrestart
   register: checkrestart_out
-  changed_when: "'Found 0 processes using old versions of upgraded files' not in check_restart_out.stdout"
+  changed_when: "'Found 0 processes using old versions of upgraded files' not in checkrestart_out.stdout"
   when: not_in_zone.changed
   notify:
   - reboot
