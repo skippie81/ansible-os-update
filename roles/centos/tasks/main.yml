@@ -34,3 +34,5 @@
   when: not_in_zone.changed
   notify:
   - reboot
+
+- meta: flush_handlers
