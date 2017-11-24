@@ -2,7 +2,7 @@
 SmartOSRepoURL: "https://pkgsrc.joyent.com/packages/SmartOS/"
 
 # get the smartos repo page and set latest repo
-SmartOSRepo: "{{ lookup('pipe',{{ playbook_dir }} + '/scripts/get_latest_smartos_release.sh ' + SmartOSRepoURL ) }}"
+SmartOSRepo: "{{  lookup('pipe',playbook_dir + '/scripts/get_latest_smartos_release.sh ' + SmartOSRepoURL ) }}"
 
 pkginReposConf: "/opt/local/etc/pkgin/repositories.conf"
 reposLine: "{{ SmartOSRepoURL }}{{ SmartOSRepo }}/x86_64/All"
