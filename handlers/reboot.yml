@@ -13,6 +13,7 @@
   delegate_to: localhost
   wait_for:
     host: "{{ inventory_hostname }}"
+    port: "{{ ansible_port }}"
     state: started
     delay: 10
     timeout: "{{ reboot_timeout }}"
