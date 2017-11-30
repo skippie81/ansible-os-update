@@ -6,6 +6,7 @@
   ignore_errors: yes
   when:
   - reboot_host
+  - ansible_hostname != lookup('pipe','hostname')
   notify:
   - wait
 
@@ -13,7 +14,7 @@
   delegate_to: localhost
   wait_for:
     host: "{{ inventory_hostname }}"
-    port: "{{ ansible_port }}"
+    port: "{{ ansible_ssh_port }}"
     state: started
     delay: 10
     timeout: "{{ reboot_timeout }}"
