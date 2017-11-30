@@ -2,6 +2,12 @@
   hosts: all
   become: false
   tasks:
+  - name: set ssh port to wait for if reboot is required
+    set_fact:
+      ansible_ssh_port: 22
+    when:
+    - ansible_ssh_port is not defined
+
   - name: create log directory
     delegate_to: localhost
     run_once: true
