@@ -3,7 +3,7 @@
   async: 1
   poll: 0
   changed_when: true
-  ignore_errors: yes
+  failed_when: false
   when:
   - reboot_host
   - ansible_hostname != lookup('pipe','hostname')
