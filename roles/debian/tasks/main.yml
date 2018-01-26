@@ -43,3 +43,10 @@
   - reboot
 
 - meta: flush_handlers
+
+- name: cleanup old kernel via apt-get autoremove
+  apt:
+    autoremove: yes
+    purge: yes
+  when:
+  - cleanup_old_kernels

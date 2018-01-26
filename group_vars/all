@@ -6,3 +6,7 @@ update_logs: true
 
 # SmartOS options
 smartos_pkgin_global_zone: true
+
+# Linux old kernel cleanup
+cleanup_old_kernels: true
+old_kernel_history_count: 3
