@@ -1,6 +1,7 @@
 - name: get zone name
   command: zonename
   register: zonename
+  changed_when: false
 
 - name: register zone name
   set_fact:
