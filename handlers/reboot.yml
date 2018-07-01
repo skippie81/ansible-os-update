@@ -1,5 +1,5 @@
 - name: reboot
-  shell: sleep 1 && shutdown -r +2 "Reboot by ansible os update"
+  shell: sleep 1 && shutdown -r now "Reboot by ansible os update"
   async: 1
   poll: 0
   changed_when: true
@@ -13,7 +13,7 @@
 - name: wait
   delegate_to: localhost
   wait_for:
-    host: "{{ inventory_hostname }}"
+    host: "{{ ansible_default_ipv4.address }}"
     port: "{{ ansible_port }}"
     state: started
     delay: 10
