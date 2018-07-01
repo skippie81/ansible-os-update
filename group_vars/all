@@ -12,4 +12,4 @@ cleanup_old_kernels: true
 old_kernel_history_count: 3
 
 # free-bsd version
-freeBSD_version: 11.2
+freeBSD_version: "11.2"

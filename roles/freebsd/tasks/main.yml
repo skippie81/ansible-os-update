@@ -31,8 +31,8 @@
 - name: Upgrade to FreeBSD release "{{ freeBSD_version }}-RELEASE"
   shell: freebsd-update --not-running-from-cron upgrade -r "{{ freeBSD_version }}-RELEASE" | tee freebsd-update.log; freebsd-update --not-running-from-cron install | tee freebsd-update.log
   register: output
-  when:
-  - freeBSD_version != ansible_distribution_version 
+  when: 
+  - freeBSD_version != ansible_distribution_version
   notify:
   - log to file
   - reboot
