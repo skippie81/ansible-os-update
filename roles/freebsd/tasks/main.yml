@@ -19,10 +19,31 @@
   when: output|changed
 
 - name: FreeBSD freebsd-update fetch and install
-  shell: freebsd-update --not-running-from-cron fetch | tee freebsd-update.log; freebsd-update --not-running-from-cron install | tee freebsd-updte.log
+  shell: freebsd-update --not-running-from-cron fetch | tee freebsd-update.log; freebsd-update --not-running-from-cron install | tee freebsd-update.log
   register: output
   when: ansible_os_family == "FreeBSD"
   changed_when: "'No updates are available to install' not in output.stdout"
+  notify:
+  - log to file
+
+- meta: flush_handlers
+
+- name: Upgrade to FreeBSD release "{{ freeBSD_version }}-RELEASE"
+  shell: freebsd-update --not-running-from-cron upgrade -r "{{ freeBSD_version }}-RELEASE" | tee freebsd-update.log; freebsd-update --not-running-from-cron install | tee freebsd-update.log
+  register: output
+  when:
+  - ansible_distribution_version != freeBSD_version
+  notify:
+  - log to file
+  - reboot
+
+- meta: flush_handlers
+
+- name: Continue upgrade to FreeBSD release "{{ freeBSD_version }}"
+  shell: freebsd-update --not-running-from-cron install | tee freebsd-update.log
+  register: output
+  when:
+  - ansible_distribution_version != freeBSD_version
   notify:
   - log to file
 
