@@ -33,7 +33,7 @@
   when: not_in_zone.changed
 
 - name: check installed kernel latest version
-  shell: "dpkg -l | grep linux-image | grep -v 'meta-package' | awk '{print $3}' | sort -n | tail -1"
+  shell: "dpkg -l | grep linux-image | grep -v 'meta-package' | grep ii | awk '{print $3}' | sort -n | tail -1"
   register: installed_kernel
   changed_when: running_kernel.stdout != installed_kernel.stdout
   when:
